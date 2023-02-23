@@ -19,7 +19,7 @@ def rain(walls):
     for i in range(1, n):
         left[i] = max(left[i - 1], walls[i])
 
-    # Find the highest wall on the right side of each wall  
+    # Find the highest wall on the right side of each wall
     right[n - 1] = walls[n - 1]
     for i in range(n - 2, -1, -1):
         right[i] = max(right[i + 1], walls[i])
