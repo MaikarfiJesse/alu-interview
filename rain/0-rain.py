@@ -1,8 +1,9 @@
 #!/usr/bin/python3
-""" Calculating how many square units of water will be retained after it rains 
-given a list of non-negative integers represent the heights of walls with unit 
+""" Calculating how many square units of water will be retained after it rains
+given a list of non-negative integers represent the heights of walls with unit
 width 1 as if viewing the cross-section of a relief map
 """
+
 
 def rain(walls):
     """Calculating the square units of retained water"""
@@ -18,12 +19,12 @@ def rain(walls):
     for i in range(1, n):
         left[i] = max(left[i - 1], walls[i])
 
-    # Find the highest wall on the right side of each wall    
+    # Find the highest wall on the right side of each wall  
     right[n - 1] = walls[n - 1]
     for i in range(n - 2, -1, -1):
         right[i] = max(right[i + 1], walls[i])
 
-    # Calculate the amount of water retained     
+    # Calculate the amount of water retained
     water = 0
     for i in range(n):
         water += min(left[i], right[i]) - walls[i]
