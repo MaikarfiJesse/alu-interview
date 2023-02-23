@@ -5,24 +5,27 @@ width 1 as if viewing the cross-section of a relief map
 """
 
 def rain(walls):
-    """Documentation"""
-     n = len(walls)
-        left_max = [0] * n
-        right_max = [0] * n
-        water = 0
+    """Calculating the square units of retained water"""
+    if not walls:
+        return 0
+
+    n = len(walls)
+    left = [0] * n
+    right = [0] * n
 
     # Find the highest wall on the left side of each wall
+    left[0] = walls[0]
     for i in range(1, n):
-        left_max[i] = max(left_max[i-1], walls[i-1])
+        left[i] = max(left[i - 1], walls[i])
 
-    # Find the highest wall on the right side of each wall
-    for i in range(n-2, -1, -1):
-        right_max[i] = max(right_max[i+1], walls[i+1])
+    # Find the highest wall on the right side of each wall    
+    right[n - 1] = walls[n - 1]
+    for i in range(n - 2, -1, -1):
+        right[i] = max(right[i + 1], walls[i])
 
-    # Calculate the amount of water retained 
-    for i in range(1, n-1):
-    diff = min(left_max[i], right_max[i]) - walls[i]
-    if diff > 0:
-        water += diff
-    
+    # Calculate the amount of water retained     
+    water = 0
+    for i in range(n):
+        water += min(left[i], right[i]) - walls[i]
+
     return water
